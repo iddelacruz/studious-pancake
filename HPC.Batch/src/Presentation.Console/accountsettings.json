@@ -1,8 +1,8 @@
 ﻿{
-  "batchAccountName": "banense",
-  "batchAccountKey": "gR37cUTxnvxAyrML0rMmJRPwL4mSbmpCJfkv1Dlt6x4JM3/Tb4wMWMUM9jzGnM8ySBfNAy6H98DRNJenTXc+pg==",
-  "batchServiceUrl": "https://banense.eastus2.batch.azure.com",
-  "storageAccountName": "banensenatch",
-  "storageAccountKey": "ZJhg1tk/p8ebzFPQ17tHwE9VhZZ363IpRtaavZPaxrrmH+Fq6rYnxI2FhzDCGxyvjNIP3JsX8ajQVtiU6pRFPQ==",
+  "batchAccountName": "",
+  "batchAccountKey": "",
+  "batchServiceUrl": "",
+  "storageAccountName": "",
+  "storageAccountKey": "",
   "storageServiceUrl": "core.windows.net"
 }
