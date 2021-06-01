@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Domain.Seedwork\Domain.Seedwork.csproj" />
+    <ProjectReference Include="..\Domain.MainBoundedContext\Domain.MainBoundedContext.csproj" />
+    <ProjectReference Include="..\Infrastructure.Data.MainBoundedContext\Infrastructure.Data.MainBoundedContext.csproj" />
+  </ItemGroup>
+</Project>

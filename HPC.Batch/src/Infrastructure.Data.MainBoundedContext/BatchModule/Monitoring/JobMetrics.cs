@@ -1,0 +1,35 @@
+﻿//Copyright (c) Microsoft Corporation
+
+namespace Infrastructure.Data.MainBoundedContext.BatchModule.Monitoring
+{
+    using System;
+    using Microsoft.Azure.Batch.Common;
+
+    /// <summary>
+    /// Contains aggregate information about a job at a point in time.
+    /// </summary>
+    internal sealed class JobMetrics
+    {
+        private readonly TimeSpan listTasksLatency;
+        private readonly TaskStateCounts taskStateCounts;
+
+        internal JobMetrics(TimeSpan listTasksLatency, TaskStateCounts taskStateCounts)
+        {
+            this.listTasksLatency = listTasksLatency;
+            this.taskStateCounts = taskStateCounts;
+        }
+
+        /// <summary>
+        /// Gets the number of tasks in each <see cref="TaskState"/> in the job.
+        /// </summary>
+        public TaskStateCounts TaskStateCounts
+        {
+            get { return this.taskStateCounts; }
+        }
+
+        internal TimeSpan ListTasksLatency
+        {
+            get { return this.listTasksLatency; }
+        }
+    }
+}
