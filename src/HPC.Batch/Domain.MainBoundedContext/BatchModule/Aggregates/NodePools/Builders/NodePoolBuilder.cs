@@ -5,7 +5,7 @@
     using System.Linq;
     using Aggregates.Applications;
     using Aggregates.Jobs;
-    using Domain.MainBoundedContext.BatchModule.Aggregates.ComputeNodes;
+    using Domain.MainBoundedContext.BatchModule.Aggregates.Nodes;
 
     public class NodePoolBuilder
     {
@@ -185,9 +185,9 @@
             return this.nodePool;
         }
 
-        private ICollection<ComputeNode> GiveMeTheNodes()
+        private ICollection<Node> GiveMeTheNodes()
         {
-            var nodes = new List<ComputeNode>(this.targetDedicatedNodes + this.targetLowPriorityNodes);
+            var nodes = new List<Node>(this.targetDedicatedNodes + this.targetLowPriorityNodes);
 
             for (int i = 0; i < this.targetDedicatedNodes; i++)
             {

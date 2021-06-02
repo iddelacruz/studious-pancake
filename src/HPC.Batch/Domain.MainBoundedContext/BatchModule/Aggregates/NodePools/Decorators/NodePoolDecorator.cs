@@ -4,7 +4,7 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
     using Aggregates.Applications;
-    using Domain.MainBoundedContext.BatchModule.Aggregates.ComputeNodes;
+    using Domain.MainBoundedContext.BatchModule.Aggregates.Nodes;
     using Domain.MainBoundedContext.BatchModule.Aggregates.Jobs;
     using Domain.Seedwork.Contracts;
 
@@ -26,7 +26,7 @@
 
         IEnumerable<PackageReference> INodePool.PackageReferences => throw new NotImplementedException();
 
-        ICollection<ComputeNode> INodePool.Nodes => throw new NotImplementedException();
+        ICollection<Node> INodePool.Nodes => throw new NotImplementedException();
 
         ICollection<Job> INodePool.Jobs => throw new NotImplementedException();
 

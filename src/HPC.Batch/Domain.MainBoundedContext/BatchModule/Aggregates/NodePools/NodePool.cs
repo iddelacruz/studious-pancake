@@ -5,7 +5,7 @@
     using System.Threading.Tasks;
     using Aggregates.Applications;
     using Aggregates.Jobs;
-    using Domain.MainBoundedContext.BatchModule.Aggregates.ComputeNodes;
+    using Domain.MainBoundedContext.BatchModule.Aggregates.Nodes;
 
     public class NodePool : INodePool
     {
@@ -22,7 +22,7 @@
         /// <summary>
         /// Get the collection of <see cref="NodePool"/>'s associated nodes.
         /// </summary>
-        public ICollection<ComputeNode> Nodes { get; internal set; }
+        public ICollection<Node> Nodes { get; internal set; }
 
         /// <summary>
         /// Gets a list of application packages to be installed on each compute node in the pool.
@@ -47,7 +47,7 @@
             this.Identifier = poolId;
             this.poolRepository = poolRepository;
             this.jobRepository = jobRepository;
-            this.Nodes = new List<ComputeNode>();
+            this.Nodes = new List<Node>();
         }
        
         /// <summary>

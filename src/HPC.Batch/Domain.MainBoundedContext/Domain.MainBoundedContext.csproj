@@ -5,8 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="BatchModule\" />
-    <Folder Include="BatchModule\Aggregates\" />
     <Folder Include="BatchModule\Aggregates\NodePools\" />
     <Folder Include="BatchModule\Aggregates\Jobs\" />
     <Folder Include="BatchModule\Aggregates\Tasks\" />
@@ -21,7 +19,6 @@
     <Folder Include="BatchModule\Aggregates\Resources\Builders\" />
     <Folder Include="BatchModule\docs\" />
     <Folder Include="BatchModule\Aggregates\Tasks\Constraints\" />
-    <Folder Include="BatchModule\Aggregates\ComputeNodes\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Domain.Seedwork\Domain.Seedwork.csproj" />

@@ -3,7 +3,7 @@
     using System;
     using System.Collections.Generic;
     using Aggregates.Applications;
-    using Domain.MainBoundedContext.BatchModule.Aggregates.ComputeNodes;
+    using Domain.MainBoundedContext.BatchModule.Aggregates.Nodes;
     using Domain.MainBoundedContext.BatchModule.Aggregates.Jobs;
     using Domain.Seedwork.Contracts;
 
@@ -13,7 +13,7 @@
 
         Details Details { get; }
 
-        public ICollection<ComputeNode> Nodes { get; }
+        public ICollection<Node> Nodes { get; }
 
         public ICollection<Job> Jobs { get; }
 

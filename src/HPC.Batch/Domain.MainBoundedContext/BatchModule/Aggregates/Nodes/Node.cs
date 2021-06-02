@@ -1,15 +1,15 @@
 ﻿
-namespace Domain.MainBoundedContext.BatchModule.Aggregates.ComputeNodes
+namespace Domain.MainBoundedContext.BatchModule.Aggregates.Nodes
 {
     using System;
 
-    public abstract class ComputeNode
+    public abstract class Node
     {
         public NodeOperatingSystem OperatingSystem { get; internal set; }
 
         public NodeSize Size { get; internal set; }
 
-        protected ComputeNode(NodeOperatingSystem operatingSystem, NodeSize size)
+        protected Node(NodeOperatingSystem operatingSystem, NodeSize size)
         {
             this.OperatingSystem = operatingSystem;
             this.Size = size;

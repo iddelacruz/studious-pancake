@@ -1,4 +1,4 @@
-﻿namespace Domain.MainBoundedContext.BatchModule.Aggregates.ComputeNodes
+﻿namespace Domain.MainBoundedContext.BatchModule.Aggregates.Nodes
 {
     using System;
 
