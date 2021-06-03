@@ -77,10 +77,6 @@
                 //TODO: it is recomendable to send 100 task at time
                 await this.client.JobOperations.AddTaskAsync(entity.Identifier, cloudTasks);
             }
-            catch (BatchException)
-            {
-                throw;
-            }
             catch (Exception)
             {
                 throw;
@@ -175,30 +171,38 @@
 
         private async Task<CloudJob> GetIfExistAsync(string jobId)
         {
-            var job = this.cloudJobs.FirstOrDefault(x => x.Id.Equals(jobId));
-
-            if (job == null)
+            try
             {
-                // Construct a detail level with a filter clause that specifies the job ID so that only
-                // a single CloudJob is returned by the Batch service (if that job exists)
-                var detail = new ODATADetailLevel(filterClause: string.Format("id eq '{0}'", jobId));
-                List<CloudJob> jobs = await this.client.JobOperations.ListJobs(detailLevel: detail)
-                    .ToListAsync()
-                    .ConfigureAwait(continueOnCapturedContext: false);
+                var job = this.cloudJobs.FirstOrDefault(x => x.Id.Equals(jobId));
 
-                job = jobs.FirstOrDefault();
-
-                if (job != null)
+                if (job == null)
                 {
-                    cloudJobs.Add(job);
+                    // Construct a detail level with a filter clause that specifies the job ID so that only
+                    // a single CloudJob is returned by the Batch service (if that job exists)
+                    var detail = new ODATADetailLevel(filterClause: string.Format("id eq '{0}'", jobId));
+                    List<CloudJob> jobs = await this.client.JobOperations.ListJobs(detailLevel: detail)
+                        .ToListAsync()
+                        .ConfigureAwait(continueOnCapturedContext: false);
+
+                    job = jobs.FirstOrDefault();
+
+                    if (job != null)
+                    {
+                        cloudJobs.Add(job);
+                    }
                 }
+                return job;
             }
-            return job;
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         private void OnMetricsUpdated(object sender, EventArgs e)
         {
-            //MetricsUpdated?.Invoke(this, new MetricEventArgs());
+            //TODO: fill this object
+            this.Notify?.Invoke(this, new MetricEventArgs(""));
         }
 
         #region disposable

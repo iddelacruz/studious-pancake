@@ -55,17 +55,16 @@ namespace Application.MainBoundedContext.BatchModule
                         .HandleAsync(pool);
                 }
 
-                this.jobRepository.Notify += OnMetricsUpdated;
-
                 await pool.CommitAsync();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                OnNotify(new ExceptionEventArgs(ex));
+                return;
             }           
         }
 
-        private void OnMetricsUpdated(object sender, NotificationEventArgs e)
+        protected void OnNotify(NotificationEventArgs e)
         {
             Notify?.Invoke(this, e);
         }
