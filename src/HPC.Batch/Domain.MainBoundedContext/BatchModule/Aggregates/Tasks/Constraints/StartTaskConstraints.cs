@@ -2,7 +2,7 @@
 namespace Domain.MainBoundedContext.BatchModule.Aggregates.Tasks.Constraints
 {
 
-    public class StartTaskConstraints : IMaxTaskRetryConstraint, IWaitForSuccessConstraint
+    public sealed class StartTaskConstraints : IMaxTaskRetryConstraint, IWaitForSuccessConstraint
     {
         /// <summary>
         /// Get the maximum number of times the task may be retried.        

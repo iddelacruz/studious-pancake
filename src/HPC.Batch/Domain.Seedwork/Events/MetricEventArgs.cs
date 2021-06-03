@@ -1,7 +1,7 @@
 ﻿
 namespace Domain.Seedwork.Events
 {
-    public class MetricEventArgs : NotificationEventArgs
+    public sealed class MetricEventArgs : NotificationEventArgs
     {
         public string JobID { get; private set; }
 

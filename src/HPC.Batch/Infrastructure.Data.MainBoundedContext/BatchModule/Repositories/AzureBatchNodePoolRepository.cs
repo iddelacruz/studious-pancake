@@ -11,7 +11,7 @@
     using Microsoft.Azure.Batch.Common;
     using NodePools;
 
-    public class AzureBatchNodePoolRepository : INodePoolRepository, IDisposable
+    public sealed class AzureBatchNodePoolRepository : INodePoolRepository, IDisposable
     {
         private readonly BatchClient client;
 

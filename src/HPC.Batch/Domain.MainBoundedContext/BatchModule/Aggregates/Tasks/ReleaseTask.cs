@@ -13,7 +13,7 @@
     /// the Job's maximum wall clock time constraint is reached, and the Job is still active,
     /// or the Job's Job Manager Task completed, and the Job is configured to terminate when the Job Manager completes. 
     /// </summary>
-    public class ReleaseTask : ITask
+    public sealed class ReleaseTask : ITask
     {
         /// <summary>
         /// Get the <see cref="ITask"/> unique identifier.

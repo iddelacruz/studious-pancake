@@ -7,6 +7,7 @@
   <ItemGroup>
     <Folder Include="BatchModule\" />
     <Folder Include="BatchModule\Handlers\" />
+    <Folder Include="BatchModule\Metrics\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Application.MainBoundedContext.DTO\Application.MainBoundedContext.DTO.csproj" />

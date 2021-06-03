@@ -1,7 +1,9 @@
-﻿using System;
+﻿
 namespace Domain.MainBoundedContext.BatchModule.Aggregates.Resources.Builders
 {
-    public class ResourceFileBuilder
+    using System;
+
+    public sealed class ResourceFileBuilder
     {
         public ResourceFileBuilder()
         {

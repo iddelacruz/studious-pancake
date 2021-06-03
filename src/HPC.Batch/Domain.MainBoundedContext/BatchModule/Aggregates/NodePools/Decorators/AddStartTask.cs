@@ -5,7 +5,7 @@ namespace Domain.MainBoundedContext.BatchModule.Aggregates.NodePools.Decorators
     using Domain.MainBoundedContext.BatchModule.Aggregates.NodePools;
     using Domain.MainBoundedContext.BatchModule.Aggregates.Tasks;
 
-    public class AddStartTask : NodePoolDecorator
+    public sealed class AddStartTask : NodePoolDecorator
     {
         private readonly StartTask startTask;
 

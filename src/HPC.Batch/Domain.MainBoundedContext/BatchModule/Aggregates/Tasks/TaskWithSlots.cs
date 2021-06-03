@@ -6,7 +6,7 @@
     /// <summary>
     /// Allow to define variable slots per task.
     /// </summary>
-    public class TaskWithSlots : Task
+    public sealed class TaskWithSlots : Task
     {
         /// <summary>
         /// Define slots per task in job.

@@ -10,7 +10,7 @@ namespace Application.MainBoundedContext.BatchModule
     using Domain.Seedwork.Contracts;
     using Domain.Seedwork.Events;
 
-    public class BatchServiceExecutor : IBatchExecutor
+    public sealed class BatchServiceExecutor : IBatchExecutor
     {
         public event NotificationEventHandler Notify;
 

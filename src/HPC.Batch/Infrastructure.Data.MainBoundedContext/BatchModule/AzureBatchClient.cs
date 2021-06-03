@@ -6,7 +6,7 @@
     using System;
 
     //singleton
-    public class AzureBatchClient : IBatchClient<BatchClient>
+    public sealed class AzureBatchClient : IBatchClient<BatchClient>
     {
         private BatchSharedKeyCredentials credentials;
 

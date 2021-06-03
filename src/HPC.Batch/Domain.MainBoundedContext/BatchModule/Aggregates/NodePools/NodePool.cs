@@ -64,7 +64,7 @@
             }
             catch (Exception)
             {
-                //capture and manage events.
+                throw;
             } 
         }
         #region disposable

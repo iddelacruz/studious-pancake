@@ -2,7 +2,7 @@
 {
     using System;
 
-    public class LowPriorityNode : Node
+    public sealed class LowPriorityNode : Node
     {
         internal LowPriorityNode(NodeOperatingSystem operatingSystem, NodeSize size) : base(operatingSystem, size)
         {

@@ -3,7 +3,7 @@
     using System;
     using Domain.MainBoundedContext.BatchModule.Aggregates.NodePools;
 
-    public class TurnsOnConcurrency : NodePoolDecorator
+    public sealed class TurnsOnConcurrency : NodePoolDecorator
     {
         private readonly uint taskSlotsPerNode;
         private readonly TaskSchedulingPolicy policy;

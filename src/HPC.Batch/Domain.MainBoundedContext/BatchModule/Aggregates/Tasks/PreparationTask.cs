@@ -10,7 +10,7 @@ namespace Domain.MainBoundedContext.BatchModule.Aggregates.Tasks
     /// <summary>
     /// A Job Preparation task to run before any tasks of the job on any given compute node.
     /// </summary>
-    public class PreparationTask : ITask
+    public sealed class PreparationTask : ITask
     {
         /// <summary>
         /// Get the <see cref="ITask"/> unique identifier.

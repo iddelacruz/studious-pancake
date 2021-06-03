@@ -3,7 +3,7 @@ namespace Domain.MainBoundedContext.BatchModule.Aggregates.Tasks.Constraints
 {
     using System;
 
-    public class PreparationTaskConstraints : IMaxTaskRetryConstraint, IMaxWallClockConstraint, IRetentionTimeConstraint, IWaitForSuccessConstraint
+    public sealed class PreparationTaskConstraints : IMaxTaskRetryConstraint, IMaxWallClockConstraint, IRetentionTimeConstraint, IWaitForSuccessConstraint
     {
         /// <summary>
         /// Gets the maximum number of times each Task may be retried. The Batch service retries a Task if its exit code is nonzero.

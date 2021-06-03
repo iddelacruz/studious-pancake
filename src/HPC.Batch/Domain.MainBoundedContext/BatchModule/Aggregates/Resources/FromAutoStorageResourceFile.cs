@@ -2,7 +2,7 @@
 {
     using System;
 
-    public class FromAutoStorageResourceFile
+    public sealed class FromAutoStorageResourceFile
     {
         /// <summary>
         /// Get the storage container name in the auto storage account.

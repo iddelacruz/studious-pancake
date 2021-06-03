@@ -6,7 +6,7 @@
     using Domain.MainBoundedContext.BatchModule.Aggregates.Tasks.Constraints;
     using Domain.Seedwork.DataTypes;
 
-    public class TaskBuilder
+    public sealed class TaskBuilder
     {
         private string taskId;
         private string command;

@@ -7,7 +7,7 @@ namespace Domain.MainBoundedContext.BatchModule.Aggregates.Tasks.Builders
     using Aggregates.Tasks.Constraints;
     using Domain.Seedwork.DataTypes;
 
-    public class ReleaseTaskBuilder
+    public sealed class ReleaseTaskBuilder
     {
         private string taskId;
         private string command;

@@ -6,7 +6,7 @@ namespace Domain.MainBoundedContext.BatchModule.Aggregates.Tasks.Builders
     using Aggregates.Tasks.Constraints;
     using Domain.Seedwork.DataTypes;
 
-    public class StartTaskBuilder
+    public sealed class StartTaskBuilder
     {
         private string taskId;
         private string command;

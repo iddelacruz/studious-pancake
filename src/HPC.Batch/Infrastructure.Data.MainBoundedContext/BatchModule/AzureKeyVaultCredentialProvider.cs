@@ -5,7 +5,7 @@
     using Infrastructure.Data.Seedwork;
     using Microsoft.Extensions.Configuration;
 
-    public class AzureKeyVaultCredentialProvider : ICredentialProvider
+    public sealed class AzureKeyVaultCredentialProvider : ICredentialProvider
     {
         private readonly IConfiguration configuration;
 

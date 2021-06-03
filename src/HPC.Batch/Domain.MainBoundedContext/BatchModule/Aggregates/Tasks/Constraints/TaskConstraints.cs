@@ -5,7 +5,7 @@
     /// <summary>
     /// Defines the constraints on a particular batch task.
     /// </summary>
-    public class TaskConstraints : IMaxTaskRetryConstraint, IMaxWallClockConstraint, IRetentionTimeConstraint
+    public sealed class TaskConstraints : IMaxTaskRetryConstraint, IMaxWallClockConstraint, IRetentionTimeConstraint
     {
         /// <summary>
         /// Gets the maximum number of times each Task may be retried. The Batch service retries a Task if its exit code is nonzero.

@@ -7,7 +7,7 @@ namespace Domain.MainBoundedContext.BatchModule.Aggregates.Tasks.Builders
     using Domain.MainBoundedContext.BatchModule.Aggregates.Tasks.Constraints;
     using Domain.Seedwork.DataTypes;
 
-    public class PreparationTaskBuilder
+    public sealed class PreparationTaskBuilder
     {
         private string taskId;
         private string command;

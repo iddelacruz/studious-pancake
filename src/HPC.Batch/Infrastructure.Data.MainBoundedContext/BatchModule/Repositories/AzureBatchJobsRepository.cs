@@ -18,7 +18,7 @@
     using Monitoring;
     using Tasks;
 
-    public class AzureBatchJobsRepository : IJobsRepository, IDisposable
+    public sealed class AzureBatchJobsRepository : IJobsRepository, IDisposable
     {
         public event NotificationEventHandler Notify;
 
@@ -52,6 +52,7 @@
 
             try
             {
+                //move this.
                 using var monitor = new MetricMonitor(this.client);
                 monitor.MetricsUpdated += OnMetricsUpdated;
                 monitor.Start();

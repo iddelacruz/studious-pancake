@@ -1,7 +1,9 @@
-﻿using System;
+﻿
 namespace Domain.MainBoundedContext.BatchModule.Aggregates.Tasks.Constraints
 {
-    public class ReleaseTaskConstraints : IMaxWallClockConstraint, IRetentionTimeConstraint
+    using System;
+
+    public sealed class ReleaseTaskConstraints : IMaxWallClockConstraint, IRetentionTimeConstraint
     {
         /// <summary>
         /// Gets the maximum duration of time for which a task is allowed to run from the time it is created.

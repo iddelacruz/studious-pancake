@@ -9,7 +9,7 @@
     /// <summary>
     /// A task which is run when a compute node joins a pool in the Azure Batch service, or when the compute node is rebooted or reimaged.
     /// </summary>
-    public class StartTask : ITask
+    public sealed class StartTask : ITask
     {
         /// <summary>
         /// Get the <see cref="ITask"/> unique identifier.

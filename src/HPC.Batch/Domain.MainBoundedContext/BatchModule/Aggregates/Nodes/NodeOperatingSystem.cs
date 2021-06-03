@@ -2,7 +2,7 @@
 {
     using System;
 
-    public class NodeOperatingSystem
+    public sealed class NodeOperatingSystem
     {
         public string NodeAgentSkuId { get; internal set; }
 
