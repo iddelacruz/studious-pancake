@@ -9,6 +9,7 @@
     using Domain.MainBoundedContext.BatchModule.Aggregates.Jobs.Decorators;
     using Domain.MainBoundedContext.BatchModule.Aggregates.NodePools;
     using Domain.MainBoundedContext.BatchModule.Aggregates.Tasks.Builders;
+    using Domain.Seedwork.Contracts;
     using Domain.Seedwork.Events;
     using Infrastructure.Data.Seedwork;
     using Jobs;
@@ -19,10 +20,7 @@
 
     public class AzureBatchJobsRepository : IJobsRepository, IDisposable
     {
-        /// <summary>
-        /// Raised when the <see cref="MetricMonitor"/> has updated the <see cref="CurrentMetrics"/>.
-        /// </summary>
-        public event EventHandler<MetricEventArgs> MetricsUpdated;
+        public event NotificationEventHandler Notify;
 
         private readonly BatchClient client;
 
@@ -200,7 +198,7 @@
 
         private void OnMetricsUpdated(object sender, EventArgs e)
         {
-            MetricsUpdated?.Invoke(this, new MetricEventArgs());
+            //MetricsUpdated?.Invoke(this, new MetricEventArgs());
         }
 
         #region disposable

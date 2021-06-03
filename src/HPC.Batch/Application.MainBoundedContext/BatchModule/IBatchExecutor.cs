@@ -3,11 +3,12 @@
     using System;
     using System.Threading.Tasks;
     using Application.MainBoundedContext.DTO;
+    using Domain.Seedwork.Contracts;
     using Domain.Seedwork.Events;
 
     public interface IBatchExecutor
     {
-        event EventHandler<MetricEventArgs> MetricsUpdated;
+        event NotificationEventHandler Notify;
         Task RunAsync(BatchExecutorConfig configuration);
     }    
 }

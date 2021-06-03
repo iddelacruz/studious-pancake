@@ -5,6 +5,8 @@
 
     public interface INotificable
     {
-        event EventHandler<MetricEventArgs> MetricsUpdated;
+        event NotificationEventHandler Notify;
     }
+
+    public delegate void NotificationEventHandler(object sender, NotificationEventArgs e);
 }

@@ -7,11 +7,12 @@ namespace Application.MainBoundedContext.BatchModule
     using Application.MainBoundedContext.DTO;
     using Domain.MainBoundedContext.BatchModule.Aggregates.Jobs;
     using Domain.MainBoundedContext.BatchModule.Aggregates.NodePools;
+    using Domain.Seedwork.Contracts;
     using Domain.Seedwork.Events;
 
     public class BatchServiceExecutor : IBatchExecutor
     {
-        public event EventHandler<MetricEventArgs> MetricsUpdated;
+        public event NotificationEventHandler Notify;
 
         private readonly INodePoolRepository nodePoolRepository;
 
@@ -54,7 +55,7 @@ namespace Application.MainBoundedContext.BatchModule
                         .HandleAsync(pool);
                 }
 
-                this.jobRepository.MetricsUpdated += OnMetricsUpdated;
+                this.jobRepository.Notify += OnMetricsUpdated;
 
                 await pool.CommitAsync();
             }
@@ -64,9 +65,9 @@ namespace Application.MainBoundedContext.BatchModule
             }           
         }
 
-        private void OnMetricsUpdated(object sender, MetricEventArgs e)
+        private void OnMetricsUpdated(object sender, NotificationEventArgs e)
         {
-            MetricsUpdated?.Invoke(this, e);
+            Notify?.Invoke(this, e);
         }
     }
 } 
