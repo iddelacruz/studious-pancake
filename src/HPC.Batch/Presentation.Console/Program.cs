@@ -7,6 +7,7 @@
     using Domain.MainBoundedContext.BatchModule.Aggregates.NodePools.Decorators;
     using Domain.MainBoundedContext.BatchModule.Aggregates.Tasks.Builders;
     using Infrastructure.Data.MainBoundedContext.BatchModule;
+    using Microsoft.Extensions.Configuration;
 
     class Program
     {
@@ -32,7 +33,7 @@
 
             //before create nodes and tasks
             await pool.CommitAsync();*/
-
+           
             Console.ReadLine();
         }
     }
