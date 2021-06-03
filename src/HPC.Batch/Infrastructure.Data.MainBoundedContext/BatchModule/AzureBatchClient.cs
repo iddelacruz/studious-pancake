@@ -1,10 +1,9 @@
 ﻿namespace Infrastructure.Data.MainBoundedContext.BatchModule
 {
-    using System;
-    using System.Threading.Tasks;
     using Infrastructure.Data.Seedwork;
     using Microsoft.Azure.Batch;
     using Microsoft.Azure.Batch.Auth;
+    using System;
 
     //singleton
     public class AzureBatchClient : IBatchClient<BatchClient>
@@ -22,17 +21,16 @@
                 throw new ArgumentNullException(nameof(provider));
             }
 
-            this.GetSecretsFromKeyVault(provider)
-                .GetAwaiter()
-                .GetResult();
+            this.GetSecretsFromVault(provider);
         }
 
         public BatchClient GiveMeTheClient()
         {
             try
             {
-                //TODO: put retry options
-                return BatchClient.Open(this.credentials);
+                var client = BatchClient.Open(this.credentials);
+                client.CustomBehaviors.Add(RetryPolicyProvider.ExponentialRetryProvider(TimeSpan.FromSeconds(5), 3));
+                return client;
             }
             catch
             {
@@ -41,13 +39,13 @@
             }            
         }
 
-        private async Task GetSecretsFromKeyVault(ICredentialProvider provider)
+        private void GetSecretsFromVault(ICredentialProvider provider)
         {
             try
             {
-                var batchServiceUrl = await provider.GetSecretAsync("batchServiceUrl");
-                var batchAccountName = await provider.GetSecretAsync("batchAccountName");
-                var batchAccountKey = await provider.GetSecretAsync("batchAccountKey");
+                var batchServiceUrl = provider.GetSecret("BatchServiceUrl");
+                var batchAccountName = provider.GetSecret("BatchAccountName");
+                var batchAccountKey = provider.GetSecret("BatchAccountKey");
 
                 this.credentials = new BatchSharedKeyCredentials(batchServiceUrl, batchAccountName, batchAccountKey);
             }

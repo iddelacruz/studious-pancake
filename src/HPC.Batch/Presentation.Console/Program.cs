@@ -33,8 +33,6 @@
             //before create nodes and tasks
             await pool.CommitAsync();*/
 
-            var provider = new AzureKeyVaultCredentialProvider();
-
             Console.ReadLine();
         }
     }

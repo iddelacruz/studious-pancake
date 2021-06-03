@@ -6,6 +6,6 @@ namespace Infrastructure.Data.Seedwork
 
     public interface ICredentialProvider
     {
-        Task<string> GetSecretAsync(string secretName);
+        string GetSecret(string secretName);
     }
 }

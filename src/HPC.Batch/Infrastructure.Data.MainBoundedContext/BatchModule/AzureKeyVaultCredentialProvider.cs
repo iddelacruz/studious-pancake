@@ -3,41 +3,24 @@
     using System;
     using System.Threading.Tasks;
     using Infrastructure.Data.Seedwork;
+    using Microsoft.Extensions.Configuration;
 
     public class AzureKeyVaultCredentialProvider : ICredentialProvider
     {
-        //private KeyVaultClient kvClient;
+        private readonly IConfiguration configuration;
 
-        //public AzureKeyVaultCredentialProvider()
-        //{
-        //    var clientId = Environment.GetEnvironmentVariable("akvClientId");
-        //    var clientSecret = Environment.GetEnvironmentVariable("akvClientSecret");
-        //    this.kvClient = Authenticate(clientId, clientSecret);
-        //}
-
-        //private static KeyVaultClient Authenticate(string clientId, string clientSecret)
-        //{
-        //    return new KeyVaultClient(async (authority, resource, scope) =>
-        //    {
-        //        var adCredential = new ClientCredential(clientId, clientSecret);
-        //        var authenticationContext = new AuthenticationContext(authority, null);
-        //        return (await authenticationContext.AcquireTokenAsync(resource, adCredential)).AccessToken;
-        //    });
-        //}
-
-        public async Task<string> GetSecretAsync(string secretId)
+        public AzureKeyVaultCredentialProvider(IConfiguration configuration)
         {
-            try
+            this.configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
+        }
+
+        public string GetSecret(string secretId)
+        {
+            if (string.IsNullOrWhiteSpace(secretId))
             {
-                //TODO: connect with azure key vault
-                //var result = await kvClient.GetSecretAsync(secretId);
-                return "";//result.Value;
+                throw new ArgumentNullException(nameof(secretId));
             }
-            catch
-            {
-                //TODO: capture azure exceptions and raise architecture custom exceptions
-                throw;
-            }
+            return this.configuration[secretId];
         }
     }
 }
