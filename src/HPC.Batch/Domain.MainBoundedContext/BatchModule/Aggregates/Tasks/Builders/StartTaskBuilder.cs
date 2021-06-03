@@ -36,7 +36,7 @@ namespace Domain.MainBoundedContext.BatchModule.Aggregates.Tasks.Builders
         /// </summary>
         /// <param name="taskCommand">The <see cref="TaskCommand"/>.</param>
         /// <returns></returns>
-        public StartTaskBuilder TaskCommand(string taskCommand)
+        public StartTaskBuilder Command(string taskCommand)
         {
             if (string.IsNullOrWhiteSpace(taskCommand))
             {

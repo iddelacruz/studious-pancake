@@ -89,7 +89,7 @@ namespace Application.MainBoundedContext.BatchModule.Handlers
                 job = new AddJobPreparationTask(job,
                     new PreparationTaskBuilder()
                     .ID($"preparation_task_{jobId}")
-                    .TaskCommand(config.PreparationTask.Command)
+                    .Command(config.PreparationTask.Command)
                     .ResourceFile(config.PreparationTask.ResourceFile?.ContainerName, config.PreparationTask.ResourceFile?.BlobName)
                     .TaskConstraints(
                         config.PreparationTask.MaxTaskRetryCount ?? 0,
@@ -105,7 +105,7 @@ namespace Application.MainBoundedContext.BatchModule.Handlers
             {
                 new AddJobReleaseTask(job, new ReleaseTaskBuilder()
                     .ID($"release_task_{jobId}")
-                    .TaskCommand(config.ReleaseTask.Command)
+                    .Command(config.ReleaseTask.Command)
                     .ResourceFile(config.ReleaseTask.ResourceFile?.ContainerName, config.ReleaseTask.ResourceFile?.BlobName)
                     .TaskConstraints(config.ReleaseTask.MaxWallClockTime, config.ReleaseTask.RetentionTime)
                     .Build());
@@ -126,7 +126,7 @@ namespace Application.MainBoundedContext.BatchModule.Handlers
 
             var builder = new TaskBuilder()
                 .ID(taskId)
-                .TaskCommand(config.Command)
+                .Command(config.Command)
                 .TaskConstraints(config.MaxTaskRetryCount ?? 0, config.MaxWallClockTime, config.RetentionTime)
                 .ResourceFile(resource.ContainerName, resource.BlobName);
 

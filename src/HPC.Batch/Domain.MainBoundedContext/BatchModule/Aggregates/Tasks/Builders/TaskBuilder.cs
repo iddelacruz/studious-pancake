@@ -40,7 +40,7 @@
         /// Set <see cref="TaskCommand"/> command.
         /// </summary>
         /// <param name="taskCommand">The <see cref="TaskCommand"/>.</param>
-        public TaskBuilder TaskCommand(string taskCommand)
+        public TaskBuilder Command(string taskCommand)
         {
             if (string.IsNullOrWhiteSpace(taskCommand))
             {

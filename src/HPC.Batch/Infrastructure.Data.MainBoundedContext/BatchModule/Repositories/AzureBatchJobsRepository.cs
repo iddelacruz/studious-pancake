@@ -146,7 +146,7 @@
                         job,
                         new PreparationTaskBuilder()
                         .ID(cloudJob.JobPreparationTask.Id)
-                        .TaskCommand(cloudJob.JobPreparationTask.CommandLine)
+                        .Command(cloudJob.JobPreparationTask.CommandLine)
                         .Build())
                         .Apply();
                 }
@@ -157,7 +157,7 @@
                         job,
                         new ReleaseTaskBuilder()
                         .ID(cloudJob.JobReleaseTask.Id)
-                        .TaskCommand(cloudJob.JobReleaseTask.CommandLine)
+                        .Command(cloudJob.JobReleaseTask.CommandLine)
                         .Build())
                         .Apply();
                 }

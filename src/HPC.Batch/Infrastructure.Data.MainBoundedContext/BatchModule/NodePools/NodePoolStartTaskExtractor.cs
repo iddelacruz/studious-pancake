@@ -24,7 +24,7 @@ namespace Infrastructure.Data.MainBoundedContext.BatchModule.NodePools
         {
             var taskBuilder = new StartTaskBuilder()
                 .ID($"start_task_{cloudPool.Id}")
-                .TaskCommand(cloudPool.StartTask.CommandLine)
+                .Command(cloudPool.StartTask.CommandLine)
                 .MaxTaskRetryCount(cloudPool.StartTask.MaxTaskRetryCount ?? 0)
                 .WaitForSuccess(cloudPool.StartTask.WaitForSuccess ?? false);
 

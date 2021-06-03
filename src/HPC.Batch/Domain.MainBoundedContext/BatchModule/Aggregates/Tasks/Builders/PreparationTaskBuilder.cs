@@ -40,7 +40,7 @@ namespace Domain.MainBoundedContext.BatchModule.Aggregates.Tasks.Builders
         /// Set <see cref="TaskCommand"/> command.
         /// </summary>
         /// <param name="taskCommand">The <see cref="TaskCommand"/>.</param>
-        public PreparationTaskBuilder TaskCommand(string taskCommand)
+        public PreparationTaskBuilder Command(string taskCommand)
         {
             if (string.IsNullOrWhiteSpace(taskCommand))
             {

@@ -40,7 +40,7 @@ namespace Application.MainBoundedContext.BatchModule.Handlers
             var poolConfig = config.PoolConfig;
             var poolId = poolConfig.Identifier;
 
-            INodePool pool = BuildBasicPool(poolId, poolConfig, config.NodesConfig);
+            INodePool pool = BuildBasicPool(poolConfig, config.NodesConfig);
 
             if (!string.IsNullOrWhiteSpace(poolConfig.Concurrency?.Policy))
             {
@@ -54,11 +54,11 @@ namespace Application.MainBoundedContext.BatchModule.Handlers
             return await base.HandleAsync(request);
         }
 
-        private INodePool BuildBasicPool(string poolId, PoolConfig poolConfig, NodesConfig nodesConfig)
+        private INodePool BuildBasicPool(PoolConfig poolConfig, NodesConfig nodesConfig)
         {   
             return new NodePoolBuilder(jobRepository, nodePoolRepository)
-                .ID(poolId)
-                .Details(poolId)
+                .ID(poolConfig.Identifier)
+                .Details(poolConfig.Identifier)
                 .OperatingSystem(nodesConfig.NodeAgentSkuId, nodesConfig.Publisher, nodesConfig.Offer, nodesConfig.Sku, nodesConfig.Version)
                 .NodeSize(nodesConfig.VirtualMachineSize)
                 .NodeType(poolConfig.DedicatedNodes, poolConfig.LowPriorityNodes ?? 0)
@@ -66,12 +66,12 @@ namespace Application.MainBoundedContext.BatchModule.Handlers
                 .Build();
         }
 
-        private static TaskAgg.StartTask BuildStartTask(string poolId, DTO.StartTask taskConfig)
+        private static TaskAgg.StartTask BuildStartTask(string poolId, StartTask taskConfig)
         {
             //TODO: acabar builder de la task
             return new StartTaskBuilder()
                     .ID($"start_task_{poolId}")
-                    .TaskCommand(taskConfig.Command)
+                    .Command(taskConfig.Command)
                     .MaxTaskRetryCount(taskConfig.MaxTaskRetryCount ?? 0)
                     .WaitForSuccess(taskConfig.WaitForSuccess ?? false)
                     .ResourceFile(taskConfig.Resource.ContainerName, taskConfig.Resource.BlobName)
