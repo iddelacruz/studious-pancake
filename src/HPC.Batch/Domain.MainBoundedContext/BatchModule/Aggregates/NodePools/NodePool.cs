@@ -67,20 +67,5 @@
                 throw;
             } 
         }
-        #region disposable
-        public void Dispose()
-        {
-            this.Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
-        private void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                
-            }
-        }
-        #endregion
     }
 }

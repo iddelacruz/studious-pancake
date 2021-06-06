@@ -9,6 +9,7 @@
     public abstract class NotificationEventArgs : EventArgs
     {
         public string Message { get; }
+
         protected NotificationEventArgs(string message)
         {
             this.Message = message;

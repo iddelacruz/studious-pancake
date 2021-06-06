@@ -1,4 +1,4 @@
-﻿ 
+﻿
 namespace Application.MainBoundedContext.BatchModule
 {
     using System;
@@ -30,6 +30,7 @@ namespace Application.MainBoundedContext.BatchModule
 
             this.jobRepository = jobRepository
                 ?? throw new ArgumentNullException(nameof(jobRepository));
+
         }
 
         public async Task RunAsync(BatchExecutorConfig config)
@@ -64,9 +65,25 @@ namespace Application.MainBoundedContext.BatchModule
             }           
         }
 
-        protected void OnNotify(NotificationEventArgs e)
+        private void OnNotify(NotificationEventArgs e)
         {
             Notify?.Invoke(this, e);
         }
+
+        #region disposable
+        public void Dispose()
+        {
+            this.Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        private void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+
+            }
+        }
+        #endregion
     }
 } 

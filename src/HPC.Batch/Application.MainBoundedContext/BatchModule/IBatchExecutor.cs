@@ -4,11 +4,9 @@
     using System.Threading.Tasks;
     using Application.MainBoundedContext.DTO;
     using Domain.Seedwork.Contracts;
-    using Domain.Seedwork.Events;
 
-    public interface IBatchExecutor
+    public interface IBatchExecutor : INotificable, IDisposable
     {
-        event NotificationEventHandler Notify;
         Task RunAsync(BatchExecutorConfig configuration);
     }    
 }

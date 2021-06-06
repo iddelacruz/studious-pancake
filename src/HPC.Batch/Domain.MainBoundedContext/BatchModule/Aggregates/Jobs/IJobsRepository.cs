@@ -2,7 +2,7 @@
 {
     using Domain.Seedwork.Contracts;
 
-    public interface IJobsRepository : IRepository<Job,string>, INotificable
+    public interface IJobsRepository : IRepository<Job,string>
     {
         
     }

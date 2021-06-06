@@ -9,19 +9,14 @@
     using Domain.MainBoundedContext.BatchModule.Aggregates.Jobs.Decorators;
     using Domain.MainBoundedContext.BatchModule.Aggregates.NodePools;
     using Domain.MainBoundedContext.BatchModule.Aggregates.Tasks.Builders;
-    using Domain.Seedwork.Contracts;
-    using Domain.Seedwork.Events;
     using Infrastructure.Data.Seedwork;
     using Jobs;
     using Microsoft.Azure.Batch;
     using Microsoft.Azure.Batch.Common;
-    using Monitoring;
     using Tasks;
 
     public sealed class AzureBatchJobsRepository : IJobsRepository, IDisposable
     {
-        public event NotificationEventHandler Notify;
-
         private readonly BatchClient client;
 
         private readonly ICollection<CloudJob> cloudJobs = new HashSet<CloudJob>();
@@ -52,11 +47,6 @@
 
             try
             {
-                //move this.
-                using var monitor = new MetricMonitor(this.client);
-                monitor.MetricsUpdated += OnMetricsUpdated;
-                monitor.Start();
-
                 var cloudJob = await this.GetIfExistAsync(entity.Identifier);
 
                 if (cloudJob is null)
@@ -198,12 +188,6 @@
             {
                 throw;
             }
-        }
-
-        private void OnMetricsUpdated(object sender, EventArgs e)
-        {
-            //TODO: fill this object
-            this.Notify?.Invoke(this, new MetricEventArgs(""));
         }
 
         #region disposable
