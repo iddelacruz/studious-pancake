@@ -20,7 +20,6 @@
     <Folder Include="BatchModule\docs\" />
     <Folder Include="BatchModule\Aggregates\Tasks\Constraints\" />
     <Folder Include="BatchModule\Services\" />
-    <Folder Include="BatchModule\Services\NodePool\" />
     <Folder Include="BatchModule\Services\Monitoring\" />
     <Folder Include="BatchModule\Services\Monitoring\Events\" />
   </ItemGroup>

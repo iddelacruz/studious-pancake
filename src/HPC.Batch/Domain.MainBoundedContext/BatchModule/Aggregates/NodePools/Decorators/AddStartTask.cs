@@ -11,26 +11,29 @@ namespace Domain.MainBoundedContext.BatchModule.Aggregates.NodePools.Decorators
 
         public AddStartTask(INodePool nodePool, StartTask startTask) : base(nodePool)
         {
-            this.startTask = startTask ?? throw new ArgumentNullException(nameof(startTask));
+            this.startTask = startTask;
         }
 
         public override INodePool Apply()
         {
-            if(this.nodePool is ConcurrentNodePool other)
+            if(this.startTask is not null)
             {
-                //TODO: fill object
-                this.nodePool = new ConcurrentNodePoolWithStartTask(
-                    this.Identifier,
-                    other.TaskSlotsPerNode,
-                    other.Policy, other.poolRepository, other.jobRepository, this.startTask);
-            }
-            else
-            {
-                //TODO: fill object
-                var simplePool = (NodePool)this.nodePool; 
-                var pool = new NodePoolWithStartTask(this.Identifier, simplePool.poolRepository, simplePool.jobRepository, this.startTask);
-                this.nodePool = pool;
-            }
+                if (this.nodePool is ConcurrentNodePool other)
+                {
+                    //TODO: fill object
+                    this.nodePool = new ConcurrentNodePoolWithStartTask(
+                        this.Identifier,
+                        other.TaskSlotsPerNode,
+                        other.Policy, other.poolRepository, other.jobRepository, this.startTask);
+                }
+                else
+                {
+                    //TODO: fill object
+                    var simplePool = (NodePool)this.nodePool;
+                    var pool = new NodePoolWithStartTask(this.Identifier, simplePool.poolRepository, simplePool.jobRepository, this.startTask);
+                    this.nodePool = pool;
+                }
+            }            
             return this.nodePool;
         }
     }

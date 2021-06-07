@@ -19,7 +19,7 @@ namespace Domain.MainBoundedContext.BatchModule.Aggregates.NodePools
             string poolId,
             uint taskSlotsPerNode,
             TaskSchedulingPolicy policy,
-            INodePoolRepository poolRepository,
+            INodesRepository poolRepository,
             IJobsRepository jobRepository,
             StartTask startTask)
             : base(poolId, taskSlotsPerNode, policy, poolRepository, jobRepository)

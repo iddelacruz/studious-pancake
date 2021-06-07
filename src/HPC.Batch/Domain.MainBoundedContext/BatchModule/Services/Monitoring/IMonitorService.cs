@@ -5,5 +5,6 @@
     public interface IMonitorService : INotificable
     {
         void Start();
+        void Stop();
     }
 }

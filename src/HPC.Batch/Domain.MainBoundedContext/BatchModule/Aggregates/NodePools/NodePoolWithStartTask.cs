@@ -15,7 +15,7 @@ namespace Domain.MainBoundedContext.BatchModule.Aggregates.NodePools
         /// </remarks>
         public StartTask StartTask { get; internal set; }
 
-        internal NodePoolWithStartTask(string poolId, INodePoolRepository poolRepository, IJobsRepository jobRepository, StartTask startTask)
+        internal NodePoolWithStartTask(string poolId, INodesRepository poolRepository, IJobsRepository jobRepository, StartTask startTask)
             : base(poolId, poolRepository, jobRepository)
         {
             this.StartTask = startTask;

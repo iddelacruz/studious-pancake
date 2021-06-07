@@ -5,10 +5,10 @@ namespace Application.MainBoundedContext.BatchModule.Handlers
     using System.Threading.Tasks;
     using Domain.MainBoundedContext.BatchModule.Aggregates.NodePools;
 
-    public interface IHandler
+    public interface IConfigurator
     {
-        IHandler SetNext(IHandler handler);
+        IConfigurator SetNext(IConfigurator handler);
 
-        Task<INodePool> HandleAsync(INodePool request);
+        Task<INodePool> ConfigureAsync(INodePool request);
     }
 }

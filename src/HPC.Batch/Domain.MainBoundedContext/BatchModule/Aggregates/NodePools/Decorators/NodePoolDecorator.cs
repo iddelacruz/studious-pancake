@@ -4,7 +4,6 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
     using Aggregates.Applications;
-    using Domain.MainBoundedContext.BatchModule.Aggregates.Nodes;
     using Domain.MainBoundedContext.BatchModule.Aggregates.Jobs;
     using Domain.Seedwork.Contracts;
 

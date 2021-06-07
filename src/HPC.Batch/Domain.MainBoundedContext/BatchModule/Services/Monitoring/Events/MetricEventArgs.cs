@@ -14,5 +14,10 @@ namespace Domain.MainBoundedContext.BatchModule.Services.Monitoring.Events
         {
             this.Metric = metric;
         }
+
+        public MetricEventArgs(string message) : base(message)
+        {
+            
+        }
     }
 }

@@ -30,7 +30,7 @@ namespace Domain.MainBoundedContext.BatchModule.Aggregates.NodePools
         /// </summary>
         public TaskSchedulingPolicy Policy { get; internal set; }
 
-        internal ConcurrentNodePool(string poolId, uint taskSlotsPerNode, TaskSchedulingPolicy policy, INodePoolRepository poolRepository, IJobsRepository jobRepository)
+        internal ConcurrentNodePool(string poolId, uint taskSlotsPerNode, TaskSchedulingPolicy policy, INodesRepository poolRepository, IJobsRepository jobRepository)
             : base(poolId, poolRepository, jobRepository)
         {
             this.TaskSlotsPerNode = taskSlotsPerNode;

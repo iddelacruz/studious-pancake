@@ -1,5 +1,5 @@
 ﻿
-namespace Domain.MainBoundedContext.BatchModule.Aggregates.Nodes
+namespace Domain.MainBoundedContext.BatchModule.Aggregates.NodePools
 {
     using System;
 

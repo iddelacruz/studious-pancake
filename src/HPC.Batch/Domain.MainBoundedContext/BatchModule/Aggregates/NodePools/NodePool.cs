@@ -5,7 +5,6 @@
     using System.Threading.Tasks;
     using Aggregates.Applications;
     using Aggregates.Jobs;
-    using Domain.MainBoundedContext.BatchModule.Aggregates.Nodes;
 
     public class NodePool : INodePool
     {
@@ -36,13 +35,13 @@
 
         internal readonly IJobsRepository jobRepository;
 
-        internal readonly INodePoolRepository poolRepository;
+        internal readonly INodesRepository poolRepository;
 
         /// <summary>
         /// Create a new instance of <see cref="NodePool"/>
         /// </summary>
         /// <param name="poolId"><see cref="NodePool"/> unique identifier.</param>
-        internal NodePool(string poolId, INodePoolRepository poolRepository, IJobsRepository jobRepository)
+        internal NodePool(string poolId, INodesRepository poolRepository, IJobsRepository jobRepository)
         {
             this.Identifier = poolId;
             this.poolRepository = poolRepository;

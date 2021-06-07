@@ -5,52 +5,56 @@
 
     public sealed class TurnsOnConcurrency : NodePoolDecorator
     {
-        private readonly uint taskSlotsPerNode;
+        private readonly uint? taskSlotsPerNode;
         private readonly TaskSchedulingPolicy policy;
 
         public TurnsOnConcurrency(INodePool nodePool, TaskSchedulingPolicy policy, uint? taskSlotsPerNode) : base(nodePool)
         {
-            this.policy = policy ?? throw new ArgumentNullException(nameof(policy));
-            this.taskSlotsPerNode = taskSlotsPerNode ?? 0;
+            this.policy = policy;
+            this.taskSlotsPerNode = taskSlotsPerNode;
         }
 
         public override INodePool Apply()
         {
-            if (this.nodePool is NodePoolWithStartTask other)
+            if(policy is not null && taskSlotsPerNode is not null && taskSlotsPerNode > 0)
             {
-                var casted = new ConcurrentNodePoolWithStartTask(
-                    other.Identifier,
-                    taskSlotsPerNode,
-                    this.policy,
-                    other.poolRepository,
-                    other.jobRepository,
-                    other.StartTask)
+                if (this.nodePool is NodePoolWithStartTask other)
                 {
-                    Details = other.Details,
-                    Nodes = other.Nodes,
-                    PackageReferences = other.PackageReferences,
-                };
+                    var casted = new ConcurrentNodePoolWithStartTask(
+                        other.Identifier,
+                        taskSlotsPerNode.Value,
+                        this.policy,
+                        other.poolRepository,
+                        other.jobRepository,
+                        other.StartTask)
+                    {
+                        Details = other.Details,
+                        Nodes = other.Nodes,
+                        PackageReferences = other.PackageReferences,
+                    };
 
-                this.nodePool = casted;
-            }
-            else
-            {
-                var simplePool = (NodePool)this.nodePool;
-
-                var casted = new ConcurrentNodePool(
-                    this.Identifier,
-                    taskSlotsPerNode,
-                    policy,
-                    simplePool.poolRepository,
-                    simplePool.jobRepository)
+                    this.nodePool = casted;
+                }
+                else
                 {
-                    Details = this.nodePool.Details,
-                    Nodes = this.nodePool.Nodes,
-                    PackageReferences = this.nodePool.PackageReferences,
-                };
+                    var simplePool = (NodePool)this.nodePool;
 
-                this.nodePool = casted;
+                    var casted = new ConcurrentNodePool(
+                        this.Identifier,
+                        taskSlotsPerNode.Value,
+                        policy,
+                        simplePool.poolRepository,
+                        simplePool.jobRepository)
+                    {
+                        Details = this.nodePool.Details,
+                        Nodes = this.nodePool.Nodes,
+                        PackageReferences = this.nodePool.PackageReferences,
+                    };
+
+                    this.nodePool = casted;
+                }
             }
+            
             return this.nodePool;
         }
     }

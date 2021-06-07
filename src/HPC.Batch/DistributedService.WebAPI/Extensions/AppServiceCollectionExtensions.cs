@@ -18,7 +18,7 @@
             services.RegisterSingleton<ICredentialProvider, AzureKeyVaultCredentialProvider>();
             services.RegisterSingleton<IBatchClient<BatchClient>, AzureBatchClient>();
 
-            services.Register<INodePoolRepository, AzureBatchNodePoolRepository>();
+            services.Register<INodesRepository, AzureBatchNodePoolRepository>();
             services.Register<IJobsRepository, AzureBatchJobsRepository>();
             services.Register<IBatchExecutor, BatchServiceExecutor>();
         }

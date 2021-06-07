@@ -23,7 +23,7 @@ namespace Infrastructure.Data.MainBoundedContext.BatchModule.NodePools
         {
             var poolBuilder = new NodePoolBuilder(
                 this.provider.GetService<IJobsRepository>(),
-                this.provider.GetService<INodePoolRepository>());
+                this.provider.GetService<INodesRepository>());
 
             var dedicated = (ushort)(cloudPool.TargetDedicatedComputeNodes ?? 0);
             var low = (ushort)(cloudPool.TargetLowPriorityComputeNodes ?? 0);

@@ -3,7 +3,6 @@ namespace Infrastructure.Data.MainBoundedContext.BatchModule.NodePools
 {
     using System.Collections.Generic;
     using System.Linq;
-    using Domain.MainBoundedContext.BatchModule.Aggregates.Nodes;
     using Domain.MainBoundedContext.BatchModule.Aggregates.NodePools;
     using Microsoft.Azure.Batch;
 
@@ -36,7 +35,7 @@ namespace Infrastructure.Data.MainBoundedContext.BatchModule.NodePools
                              targetLowPriorityComputeNodes: NodeCounts<LowPriorityNode>(pool.Nodes));
         }
 
-        private static int NodeCounts<T>(IEnumerable<Domain.MainBoundedContext.BatchModule.Aggregates.Nodes.Node> nodes)
+        private static int NodeCounts<T>(IEnumerable<Node> nodes)
         {
             int output = 0;
 

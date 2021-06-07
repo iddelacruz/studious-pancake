@@ -40,14 +40,29 @@ namespace Domain.MainBoundedContext.BatchModule.Services.Monitoring
             {
                 if (this.runTask is null)
                 {
+                    OnNotify(new MetricEventArgs("Starting monitor..."));
                     this.runTask = Task.Run(() => Run());
                 }
             }
         }
 
-        // The main monitoring engine. This method runs continuously until the monitor is disposed.
-        // Each time round the loop it calls the Batch service to get task metrics,
-        // then waits for the monitoring interval before going round the loop again.
+        /// <summary>
+        /// Stop monitor execution.
+        /// </summary>
+        public void Stop()
+        {
+            OnNotify(new MetricEventArgs("Stopping monitor..."));
+            this.runCancel.Cancel();
+        }
+
+        /// <summary>
+        /// The main monitoring engine. 
+        /// </summary>
+        /// <remarks>
+        /// This method runs continuously until the monitor is disposed.
+        /// Each time round the loop it calls the Batch service to get task metrics,
+        /// then waits for the monitoring interval before going round the loop again.
+        /// </remarks>
         private async Task Run()
         {
             while (!this.runCancel.IsCancellationRequested)
@@ -68,6 +83,6 @@ namespace Domain.MainBoundedContext.BatchModule.Services.Monitoring
         private void OnNotify(NotificationEventArgs e)
         {
             Notify?.Invoke(this, e);
-        }
+        }    
     }
 }

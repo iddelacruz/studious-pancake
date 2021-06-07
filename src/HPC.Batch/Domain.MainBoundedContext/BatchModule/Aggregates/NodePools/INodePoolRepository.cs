@@ -3,7 +3,7 @@
     using System;
     using Domain.Seedwork.Contracts;
 
-    public interface INodePoolRepository : IRepository<INodePool,string>
+    public interface INodesRepository : IRepository<INodePool,string>
     {
     }
 }

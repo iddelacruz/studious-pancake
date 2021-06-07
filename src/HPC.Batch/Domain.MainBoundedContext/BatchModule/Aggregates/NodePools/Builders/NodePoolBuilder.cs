@@ -5,7 +5,6 @@
     using System.Linq;
     using Aggregates.Applications;
     using Aggregates.Jobs;
-    using Domain.MainBoundedContext.BatchModule.Aggregates.Nodes;
 
     public class NodePoolBuilder
     {
@@ -19,7 +18,7 @@
 
         private NodePool nodePool;
 
-        private readonly INodePoolRepository nodePoolRepository;
+        private readonly INodesRepository nodePoolRepository;
 
         private NodeOperatingSystem operatingSystem;
 
@@ -32,7 +31,7 @@
         /// <summary>
         /// Create a new instance of <see cref="NodePoolBuilder"/>
         /// </summary>
-        public NodePoolBuilder(IJobsRepository jobsRepository, INodePoolRepository nodePoolRepository)
+        public NodePoolBuilder(IJobsRepository jobsRepository, INodesRepository nodePoolRepository)
         {
             this.jobsRepository = jobsRepository ?? throw new ArgumentNullException(nameof(jobsRepository));
             this.nodePoolRepository = nodePoolRepository ?? throw new ArgumentNullException(nameof(nodePoolRepository));

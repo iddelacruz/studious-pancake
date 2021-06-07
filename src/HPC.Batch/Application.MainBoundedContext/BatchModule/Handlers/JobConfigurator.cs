@@ -13,17 +13,30 @@ namespace Application.MainBoundedContext.BatchModule.Handlers
     using Domain.MainBoundedContext.BatchModule.Aggregates.Tasks;
     using Domain.MainBoundedContext.BatchModule.Aggregates.Tasks.Builders;
 
-    internal class JobHandler : Handler
+    internal class JobConfigurator : Configurator
     {
 
-        public JobHandler(BatchExecutorConfig config) : base(config)
+        public JobConfigurator(BatchExecutorConfig config) : base(config)
         {
             
         }
 
-        public override async Task<INodePool> HandleAsync(INodePool request)
+        public override async Task<INodePool> ConfigureAsync(INodePool request)
         {
-            this.Validate();
+            if (this.config.Resources is null || !this.config.Resources.Any())
+            {
+                throw new InvalidOperationException("Resource object can't be null or empty.");
+            }
+
+            if (this.config.JobsConfig is null)
+            {
+                throw new ArgumentNullException(nameof(this.config.JobsConfig));
+            }
+
+            if (this.config.TasksConfig is null)
+            {
+                throw new ArgumentNullException(nameof(this.config.TasksConfig));
+            }
 
             var jobConfig = this.config.JobsConfig;
 
@@ -39,7 +52,7 @@ namespace Application.MainBoundedContext.BatchModule.Handlers
                 request.Jobs.Add(job);
             }
 
-            return await base.HandleAsync(request);
+            return await base.ConfigureAsync(request);
         }
 
         private static IEnumerable<IEnumerable<ResourceFile>> ChunkInternal(IEnumerable<ResourceFile> source, uint chunkSize)
@@ -131,24 +144,6 @@ namespace Application.MainBoundedContext.BatchModule.Handlers
                 .ResourceFile(resource.ContainerName, resource.BlobName);
 
             return builder.Build();    
-        }
-
-        private void Validate()
-        {
-            if (this.config.Resources is null && !this.config.Resources.Any())
-            {
-                throw new InvalidOperationException("Resource object can't be null or empty.");
-            }
-
-            if (this.config.JobsConfig is null)
-            {
-                throw new ArgumentNullException(nameof(this.config.JobsConfig));
-            }
-
-            if (this.config.TasksConfig is null)
-            {
-                throw new ArgumentNullException(nameof(this.config.TasksConfig));
-            }
         }
     }
 }
