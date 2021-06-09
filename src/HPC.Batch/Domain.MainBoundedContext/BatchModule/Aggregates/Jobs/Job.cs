@@ -30,6 +30,8 @@ namespace Domain.MainBoundedContext.BatchModule.Aggregates.Jobs
         /// </summary>
         public TaskFailedAction TaskFailedAction { get; internal set; }
 
+        public JobState State { get; internal set; }
+
         /// <summary>
         /// Job's associated tasks.
         /// </summary>

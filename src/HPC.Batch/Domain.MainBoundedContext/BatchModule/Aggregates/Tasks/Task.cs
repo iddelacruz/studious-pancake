@@ -45,6 +45,8 @@
         /// </summary>
         public PackageReference PackageReference { get; internal set; }
 
+        public TaskState State { get; internal set; }
+
         internal Job Job { get; set; }
 
         internal Task()

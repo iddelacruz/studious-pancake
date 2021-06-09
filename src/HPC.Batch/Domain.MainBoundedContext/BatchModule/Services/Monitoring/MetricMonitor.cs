@@ -20,7 +20,7 @@ namespace Domain.MainBoundedContext.BatchModule.Services.Monitoring
 
         private readonly TimeSpan monitorInterval;
 
-        private readonly CancellationTokenSource runCancel = new();
+        private readonly CancellationTokenSource tokenSource = new();
 
         private Task runTask;
 
@@ -52,7 +52,7 @@ namespace Domain.MainBoundedContext.BatchModule.Services.Monitoring
         public void Stop()
         {
             OnNotify(new MetricEventArgs("Stopping monitor..."));
-            this.runCancel.Cancel();
+            this.Destroy(true);
         }
 
         /// <summary>
@@ -65,16 +65,17 @@ namespace Domain.MainBoundedContext.BatchModule.Services.Monitoring
         /// </remarks>
         private async Task Run()
         {
-            while (!this.runCancel.IsCancellationRequested)
+            while (!this.tokenSource.IsCancellationRequested)
             {      
                 OnNotify(new MetricEventArgs(await this.collector.CollectAsync()));
 
                 try
                 {
-                    await Task.Delay(this.monitorInterval, this.runCancel.Token);
+                    await Task.Delay(this.monitorInterval, this.tokenSource.Token);
                 }
-                catch (TaskCanceledException)
+                catch (TaskCanceledException ex)
                 {
+                    OnNotify(new ExceptionEventArgs(ex));
                     throw;
                 }
             }
@@ -83,6 +84,31 @@ namespace Domain.MainBoundedContext.BatchModule.Services.Monitoring
         private void OnNotify(NotificationEventArgs e)
         {
             Notify?.Invoke(this, e);
-        }    
+        }
+
+        #region disposable
+        public void Dispose()
+        {
+            this.Destroy(true);
+            GC.SuppressFinalize(this);
+        }
+
+        private void Destroy(bool disposing)
+        {
+            if (disposing)
+            {
+                lock (this.locker)
+                {
+                    if (this.runTask is not null)
+                    {
+                        this.tokenSource.Cancel();
+                        this.runTask.Wait();
+                    }
+                }
+
+                this.tokenSource.Dispose();
+            }
+        }
+        #endregion
     }
 }

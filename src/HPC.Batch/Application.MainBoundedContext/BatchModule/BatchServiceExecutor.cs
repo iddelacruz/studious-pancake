@@ -138,7 +138,10 @@ namespace Application.MainBoundedContext.BatchModule
         {
             if (disposing)
             {
-
+                if(this.monitor is not null)
+                {
+                    this.monitor.Dispose();
+                }
             }
         }
         #endregion

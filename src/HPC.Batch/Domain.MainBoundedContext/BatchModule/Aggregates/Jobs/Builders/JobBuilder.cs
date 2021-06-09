@@ -16,8 +16,9 @@ namespace Domain.MainBoundedContext.BatchModule.Aggregates.Jobs.Builders
         private int maxTaskRetryCount;
         private DateTime? maxWallClockTime;
 
+        private JobState state;
+
         private TaskFailedAction taskFailedAction;
-        
 
         /// <summary>
         /// Sets the <see cref="Job"/> unique identifier.
@@ -89,6 +90,15 @@ namespace Domain.MainBoundedContext.BatchModule.Aggregates.Jobs.Builders
             return this;
         }
 
+        public JobBuilder State(JobState state)
+        {
+            if(state is not null)
+            {
+                this.state = state;
+            }            
+            return this;
+        }
+
         /// <summary>
         /// Create a new instance of <see cref="Job"/>
         /// </summary>
@@ -98,6 +108,7 @@ namespace Domain.MainBoundedContext.BatchModule.Aggregates.Jobs.Builders
             {
                 Priority = this.priority,
                 Contraints = new JobContraints(this.maxTaskRetryCount, this.maxWallClockTime),
+                State = this.state,
                 TaskFailedAction = this.taskFailedAction
             };
             return job;

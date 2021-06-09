@@ -78,9 +78,30 @@
         /// Fin all the <see cref="Job"/> assocoated to a <see cref="INodePool"/>
         /// </summary>
         /// <returns>a collection of <see cref="Job"/></returns>
-        public Task<IEnumerable<Job>> GetAllAsync()
-        {
-            throw new NotImplementedException();
+        public async Task<IEnumerable<Job>> GetAllAsync()
+        {            
+            try
+            {
+                
+                var detail = new ODATADetailLevel(selectClause: "id,state");
+
+                var jobs = await this.client.JobOperations.ListJobs(detail).ToListAsync();
+                var output = new List<Job>(jobs.Count);
+
+                foreach (var job in jobs)
+                {
+                    output.Add(new JobBuilder()
+                        .ID(job.Id)
+                        .State(ExtractState(job.State))
+                        .Build());
+                }
+
+                return output;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         /// <summary>
@@ -188,6 +209,21 @@
             {
                 throw;
             }
+        }
+
+        private static Domain.MainBoundedContext.BatchModule.Aggregates.Jobs.JobState ExtractState(Microsoft.Azure.Batch.Common.JobState? state)
+        {
+            Domain.MainBoundedContext.BatchModule.Aggregates.Jobs.JobState output = new NullState();
+
+            if (state is not null)
+            {
+                switch (state)
+                {
+                    default:
+                        break;
+                }
+            }
+            return output;
         }
 
         #region disposable
