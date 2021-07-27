@@ -1,5 +1,5 @@
 ﻿
-namespace Application.MainBoundedContext.BatchModule.Handlers
+namespace Application.MainBoundedContext.BatchModule.Configurators
 {
     using System;
     using System.Collections.Generic;

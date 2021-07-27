@@ -3,7 +3,7 @@ namespace Application.MainBoundedContext.BatchModule
 {
     using System;
     using System.Threading.Tasks;
-    using Application.MainBoundedContext.BatchModule.Handlers;
+    using Application.MainBoundedContext.BatchModule.Configurators;
     using Application.MainBoundedContext.DTO;
     using Domain.MainBoundedContext.BatchModule.Aggregates.Jobs;
     using Domain.MainBoundedContext.BatchModule.Aggregates.NodePools;

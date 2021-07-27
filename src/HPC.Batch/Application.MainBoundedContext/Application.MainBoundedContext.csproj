@@ -6,7 +6,7 @@
 
   <ItemGroup>
     <Folder Include="BatchModule\" />
-    <Folder Include="BatchModule\Handlers\" />
+    <Folder Include="BatchModule\Configurators\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Application.MainBoundedContext.DTO\Application.MainBoundedContext.DTO.csproj" />
